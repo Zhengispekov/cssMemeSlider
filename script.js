@@ -1,20 +1,28 @@
-const carousels = document.querySelectorAll('.carousel');
+ const carousels = document.querySelectorAll('.carousel');
+        const imageText = document.querySelector('.image-text'); 
 
-carousels.forEach((carousel) => {
-    const buttons = carousel.parentElement.querySelector('.buttons');
-    const pagButtons = buttons.querySelectorAll('.pag');
-    let sectionIndex = 0;
+        carousels.forEach((carousel) => {
+            const buttons = carousel.parentElement.nextElementSibling.querySelector('.buttons');
+            const pagButtons = buttons.querySelectorAll('.pag');
+            let sectionIndex = 0;
 
-    pagButtons.forEach((button, ind) => {
-        button.addEventListener('click', () => {
-            sectionIndex = ind;
-            carousel.style.transform = `translate(-${sectionIndex * 25}%)`;
+            const imageTextArray = [
+                "Уходи!",
+                "Я не шучу!!",
+                "Я очень зол!!!",
+                "Эхх...не получилось"
+            ];
 
-            
-            pagButtons.forEach((btn) => btn.classList.remove('active'));
+            pagButtons.forEach((button, ind) => {
+                button.addEventListener('click', () => {
+                    sectionIndex = ind;
+                    const translateValue = `translateX(-${sectionIndex * 25}%)`;
+                    carousel.style.transform = translateValue;
 
-            
-            button.classList.add('active');
+                    pagButtons.forEach((btn) => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    imageText.textContent = imageTextArray[ind];
+                });
+            });
         });
-    });
-});
