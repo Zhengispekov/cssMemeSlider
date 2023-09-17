@@ -1,15 +1,20 @@
-const memes = querySelectorAll(".memes");
-var counter = 0; 
+const carousels = document.querySelectorAll('.carousel');
 
-memes.forEach((slide,index) => {
-    slide.style.left = `${index * 100}%`
+carousels.forEach((carousel) => {
+    const buttons = carousel.parentElement.querySelector('.buttons');
+    const pagButtons = buttons.querySelectorAll('.pag');
+    let sectionIndex = 0;
+
+    pagButtons.forEach((button, ind) => {
+        button.addEventListener('click', () => {
+            sectionIndex = ind;
+            carousel.style.transform = `translate(-${sectionIndex * 25}%)`;
+
+            
+            pagButtons.forEach((btn) => btn.classList.remove('active'));
+
+            
+            button.classList.add('active');
+        });
+    });
 });
-
-
-const memesSlide = () => {
-    memes.forEach(
-        (slide) => {
-            slide.style.transform = `translateX(-${counter * 100%})`
-        }
-    )
-}
